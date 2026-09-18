@@ -1,10 +1,182 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="Hike.App"
-             RequestedThemeVariant="Default">
-             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+             RequestedThemeVariant="Dark">
+
+    <Application.Resources>
+
+        <!-- ===================== Palette ===================== -->
+        <SolidColorBrush x:Key="Base" Color="#0F1115"/>
+        <SolidColorBrush x:Key="Panel" Color="#171922"/>
+        <SolidColorBrush x:Key="PanelAlt" Color="#13151C"/>
+        <SolidColorBrush x:Key="Elevated" Color="#1D2029"/>
+        <SolidColorBrush x:Key="ElevatedHover" Color="#242833"/>
+        <SolidColorBrush x:Key="Hairline" Color="#272B35"/>
+        <SolidColorBrush x:Key="HairlineStrong" Color="#333846"/>
+
+        <SolidColorBrush x:Key="TextPrimary" Color="#EDEFF4"/>
+        <SolidColorBrush x:Key="TextSecondary" Color="#8A90A0"/>
+        <SolidColorBrush x:Key="TextTertiary" Color="#565C6B"/>
+
+        <SolidColorBrush x:Key="Accent" Color="#FF6B4A"/>
+        <SolidColorBrush x:Key="AccentDim" Color="#3A241C"/>
+        <SolidColorBrush x:Key="AccentText" Color="#FFFFFF"/>
+
+        <!-- HTTP method colors -->
+        <SolidColorBrush x:Key="MethodGet" Color="#4FD1A5"/>
+        <SolidColorBrush x:Key="MethodPost" Color="#5B8CFF"/>
+        <SolidColorBrush x:Key="MethodPut" Color="#F2B84B"/>
+        <SolidColorBrush x:Key="MethodPatch" Color="#C58CF2"/>
+        <SolidColorBrush x:Key="MethodDelete" Color="#F2555A"/>
+
+        <!-- Status -->
+        <SolidColorBrush x:Key="StatusOk" Color="#4FD1A5"/>
+        <SolidColorBrush x:Key="StatusWarn" Color="#F2B84B"/>
+        <SolidColorBrush x:Key="StatusError" Color="#F2555A"/>
+
+        <!-- JSON syntax colors -->
+        <SolidColorBrush x:Key="JsonKey" Color="#7CC7FF"/>
+        <SolidColorBrush x:Key="JsonString" Color="#B7E39A"/>
+        <SolidColorBrush x:Key="JsonNumber" Color="#F2B84B"/>
+        <SolidColorBrush x:Key="JsonPunct" Color="#565C6B"/>
+
+        <!-- ===================== Fonts ===================== -->
+        <FontFamily x:Key="FontUI">Inter, Segoe UI, Ubuntu, sans-serif</FontFamily>
+        <FontFamily x:Key="FontMono">JetBrains Mono, Cascadia Code, Consolas, monospace</FontFamily>
+
+    </Application.Resources>
 
     <Application.Styles>
         <FluentTheme />
+
+        <!-- ===================== Base text ===================== -->
+        <Style Selector="TextBlock">
+            <Setter Property="FontFamily" Value="{StaticResource FontUI}"/>
+            <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
+        </Style>
+
+        <!-- ===================== Buttons ===================== -->
+        <Style Selector="Button">
+            <Setter Property="FontFamily" Value="{StaticResource FontUI}"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Background" Value="{StaticResource Elevated}"/>
+            <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Hairline}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Padding" Value="12,7"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style Selector="Button:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="{StaticResource ElevatedHover}"/>
+        </Style>
+
+        <Style Selector="Button.primary">
+            <Setter Property="Background" Value="{StaticResource Accent}"/>
+            <Setter Property="Foreground" Value="{StaticResource AccentText}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="18,7"/>
+            <Setter Property="Effect">
+                <DropShadowEffect Color="#FF6B4A" BlurRadius="20" OffsetX="0" OffsetY="0" Opacity="0.4"/>
+            </Setter>
+        </Style>
+        <Style Selector="Button.primary:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#FF7D5F"/>
+        </Style>
+
+        <Style Selector="Button.ghost">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="{StaticResource TextSecondary}"/>
+            <Setter Property="Padding" Value="6"/>
+        </Style>
+        <Style Selector="Button.ghost:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="{StaticResource ElevatedHover}"/>
+        </Style>
+
+        <!-- ===================== Tab strip (RadioButton-as-tab) ===================== -->
+        <Style Selector="RadioButton.tab">
+            <Setter Property="FontFamily" Value="{StaticResource FontUI}"/>
+            <Setter Property="FontSize" Value="12.5"/>
+            <Setter Property="Foreground" Value="{StaticResource TextSecondary}"/>
+            <Setter Property="Padding" Value="4,10"/>
+            <Setter Property="Margin" Value="0,0,20,0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border Background="Transparent" BorderThickness="0,0,0,2" BorderBrush="Transparent" Name="Indicator">
+                        <ContentPresenter Content="{TemplateBinding Content}"
+                                           Padding="{TemplateBinding Padding}"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+        <Style Selector="RadioButton.tab:checked">
+            <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+        <Style Selector="RadioButton.tab:checked /template/ Border#Indicator">
+            <Setter Property="BorderBrush" Value="{StaticResource Accent}"/>
+        </Style>
+
+        <!-- ===================== TextBox ===================== -->
+        <Style Selector="TextBox">
+            <Setter Property="Background" Value="{StaticResource Elevated}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Hairline}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
+            <Setter Property="CaretBrush" Value="{StaticResource Accent}"/>
+            <Setter Property="Padding" Value="10,7"/>
+            <Setter Property="FontFamily" Value="{StaticResource FontUI}"/>
+            <Setter Property="FontSize" Value="13"/>
+        </Style>
+        <Style Selector="TextBox:focus /template/ Border">
+            <Setter Property="BorderBrush" Value="{StaticResource Accent}"/>
+        </Style>
+        <Style Selector="TextBox.mono">
+            <Setter Property="FontFamily" Value="{StaticResource FontMono}"/>
+        </Style>
+        <Style Selector="TextBox.urlbar">
+            <Setter Property="Background" Value="{StaticResource PanelAlt}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontFamily" Value="{StaticResource FontMono}"/>
+            <Setter Property="FontSize" Value="13.5"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+
+        <!-- ===================== ComboBox (method picker) ===================== -->
+        <Style Selector="ComboBox">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="{StaticResource MethodGet}"/>
+            <Setter Property="FontFamily" Value="{StaticResource FontMono}"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="13.5"/>
+            <Setter Property="Padding" Value="10,0"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+
+        <!-- ===================== TreeView ===================== -->
+        <Style Selector="TreeView">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Padding" Value="4"/>
+        </Style>
+        <Style Selector="TreeViewItem">
+            <Setter Property="FontFamily" Value="{StaticResource FontUI}"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Padding" Value="4,3"/>
+        </Style>
+        <Style Selector="TreeViewItem:selected /template/ Border#PART_LayoutRoot">
+            <Setter Property="Background" Value="{StaticResource Elevated}"/>
+            <Setter Property="CornerRadius" Value="5"/>
+        </Style>
+
+        <!-- ===================== ScrollBar (slim) ===================== -->
+        <Style Selector="ScrollBar">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+
     </Application.Styles>
 </Application>

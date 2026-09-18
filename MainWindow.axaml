@@ -2,8 +2,251 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="800"
         x:Class="Hike.MainWindow"
-        Title="Hike">
-    Welcome to Avalonia!
+        Title="Hike"
+        Width="1280" Height="800"
+        Background="{StaticResource Base}"
+        FontFamily="{StaticResource FontUI}">
+
+    <Grid ColumnDefinitions="248,1,*">
+
+        <!-- ============================================================ -->
+        <!-- SIDEBAR -->
+        <!-- ============================================================ -->
+        <Grid Grid.Column="0" Background="{StaticResource Panel}" RowDefinitions="56,52,*,1,44">
+
+            <!-- Workspace -->
+            <Grid Row="0" ColumnDefinitions="Auto,*" Margin="16,0" VerticalAlignment="Center">
+                <Border Grid.Column="0" Width="26" Height="26" CornerRadius="7" Background="{StaticResource Accent}">
+                    <TextBlock Text="H" FontFamily="{StaticResource FontMono}" FontWeight="Bold"
+                               Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"/>
+                </Border>
+                <StackPanel Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Center">
+                    <TextBlock Text="Hike" FontWeight="SemiBold" FontSize="14"/>
+                    <TextBlock Text="Personal workspace" FontSize="11" Foreground="{StaticResource TextTertiary}"/>
+                </StackPanel>
+            </Grid>
+
+            <!-- Search -->
+            <TextBox  Grid.Row="1" Margin="12,0,12,8" Watermark="Search collections"
+                     VerticalAlignment="Center" FontSize="12.5" Padding="8,6"/>
+
+            <!-- Collections tree -->
+            <ScrollViewer Grid.Row="2">
+                <TreeView Margin="8,0" BorderThickness="0">
+
+                    <TreeViewItem IsExpanded="True">
+                        <TreeViewItem.Header>
+                            <TextBlock Text="Auth" Foreground="{StaticResource TextSecondary}" FontSize="12.5"/>
+                        </TreeViewItem.Header>
+                        <TreeViewItem>
+                            <TreeViewItem.Header>
+                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                    <TextBlock Text="POST" Foreground="{StaticResource MethodPost}" FontFamily="{StaticResource FontMono}" FontSize="11" FontWeight="Bold" Width="34"/>
+                                    <TextBlock Text="Login" FontSize="13"/>
+                                </StackPanel>
+                            </TreeViewItem.Header>
+                        </TreeViewItem>
+                        <TreeViewItem>
+                            <TreeViewItem.Header>
+                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                    <TextBlock Text="POST" Foreground="{StaticResource MethodPost}" FontFamily="{StaticResource FontMono}" FontSize="11" FontWeight="Bold" Width="34"/>
+                                    <TextBlock Text="Refresh token" FontSize="13"/>
+                                </StackPanel>
+                            </TreeViewItem.Header>
+                        </TreeViewItem>
+                    </TreeViewItem>
+
+                    <TreeViewItem IsExpanded="True">
+                        <TreeViewItem.Header>
+                            <TextBlock Text="Users" Foreground="{StaticResource TextSecondary}" FontSize="12.5"/>
+                        </TreeViewItem.Header>
+                        <TreeViewItem IsSelected="True">
+                            <TreeViewItem.Header>
+                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                    <TextBlock Text="GET" Foreground="{StaticResource MethodGet}" FontFamily="{StaticResource FontMono}" FontSize="11" FontWeight="Bold" Width="34"/>
+                                    <TextBlock Text="List users" FontSize="13"/>
+                                </StackPanel>
+                            </TreeViewItem.Header>
+                        </TreeViewItem>
+                        <TreeViewItem>
+                            <TreeViewItem.Header>
+                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                    <TextBlock Text="GET" Foreground="{StaticResource MethodGet}" FontFamily="{StaticResource FontMono}" FontSize="11" FontWeight="Bold" Width="34"/>
+                                    <TextBlock Text="Get user by id" FontSize="13"/>
+                                </StackPanel>
+                            </TreeViewItem.Header>
+                        </TreeViewItem>
+                        <TreeViewItem>
+                            <TreeViewItem.Header>
+                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                    <TextBlock Text="PATCH" Foreground="{StaticResource MethodPatch}" FontFamily="{StaticResource FontMono}" FontSize="11" FontWeight="Bold" Width="34"/>
+                                    <TextBlock Text="Update user" FontSize="13"/>
+                                </StackPanel>
+                            </TreeViewItem.Header>
+                        </TreeViewItem>
+                        <TreeViewItem>
+                            <TreeViewItem.Header>
+                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                    <TextBlock Text="DELETE" Foreground="{StaticResource MethodDelete}" FontFamily="{StaticResource FontMono}" FontSize="11" FontWeight="Bold" Width="34"/>
+                                    <TextBlock Text="Delete user" FontSize="13"/>
+                                </StackPanel>
+                            </TreeViewItem.Header>
+                        </TreeViewItem>
+                    </TreeViewItem>
+
+                    <TreeViewItem>
+                        <TreeViewItem.Header>
+                            <TextBlock Text="Orders" Foreground="{StaticResource TextSecondary}" FontSize="12.5"/>
+                        </TreeViewItem.Header>
+                    </TreeViewItem>
+
+                </TreeView>
+            </ScrollViewer>
+
+            <Border Grid.Row="3" Background="{StaticResource Hairline}" Height="1"/>
+
+            <!-- Environment picker -->
+            <Grid Grid.Row="4" ColumnDefinitions="*,Auto" Margin="12,0" VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal" Spacing="6">
+                    <Ellipse Width="7" Height="7" Fill="{StaticResource TextTertiary}"/>
+                    <TextBlock Text="No environment" FontSize="12" Foreground="{StaticResource TextSecondary}"/>
+                </StackPanel>
+                <TextBlock Grid.Column="1" Text="⌄" Foreground="{StaticResource TextTertiary}"/>
+            </Grid>
+
+        </Grid>
+
+        
+        <Border Grid.Column="1" Background="{StaticResource Hairline}"/>
+
+        <!-- MAIN AREA -->
+        <Grid Grid.Column="2" RowDefinitions="Auto,1,*,Auto">
+
+            <Grid Row="0" Margin="20,16,20,14" RowDefinitions="Auto,Auto">
+
+                <Grid Row="0" ColumnDefinitions="Auto,*,12,Auto">
+                    <Border Grid.Column="0" Background="{StaticResource PanelAlt}" CornerRadius="6,0,0,6"
+                            BorderBrush="{StaticResource Hairline}" BorderThickness="1,1,0,1">
+                        <ComboBox SelectedIndex="0" MinWidth="96">
+                            <ComboBoxItem>GET</ComboBoxItem>
+                            <ComboBoxItem>POST</ComboBoxItem>
+                            <ComboBoxItem>PUT</ComboBoxItem>
+                            <ComboBoxItem>PATCH</ComboBoxItem>
+                            <ComboBoxItem>DELETE</ComboBoxItem>
+                        </ComboBox>
+                    </Border>
+                    <Border Grid.Column="1" Background="{StaticResource PanelAlt}"
+                            BorderBrush="{StaticResource Hairline}" BorderThickness="0,1,1,1" CornerRadius="0,6,6,0">
+                        <TextBox Classes="urlbar" Text="https://api.example.com/v1/users" BorderThickness="0"/>
+                    </Border>
+                    <Button Grid.Column="3" Classes="primary" Content="Send"/>
+                </Grid>
+
+                <!-- Request tabs -->
+                <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="4,14,0,0">
+                    <RadioButton Classes="tab" GroupName="reqtabs" Content="Params" IsChecked="True"/>
+                    <RadioButton Classes="tab" GroupName="reqtabs" Content="Headers"/>
+                    <RadioButton Classes="tab" GroupName="reqtabs" Content="Body"/>
+                    <RadioButton Classes="tab" GroupName="reqtabs" Content="Auth"/>
+                    <RadioButton Classes="tab" GroupName="reqtabs" Content="Scripts"/>
+                </StackPanel>
+            </Grid>
+
+            <Border Grid.Row="1" Background="{StaticResource Hairline}"/>
+
+            <Grid Row="2" Margin="20,16" RowDefinitions="Auto,*">
+
+                <Border Grid.Row="0" Background="{StaticResource Panel}" CornerRadius="8"
+                        BorderBrush="{StaticResource Hairline}" BorderThickness="1" MaxHeight="220" VerticalAlignment="Top">
+                    <Grid RowDefinitions="Auto,1,Auto,Auto,Auto">
+
+                        <Grid Row="0" ColumnDefinitions="28,*,*,*" Margin="14,10">
+                            <TextBlock Grid.Column="1" Text="Key" FontSize="11.5" Foreground="{StaticResource TextTertiary}"/>
+                            <TextBlock Grid.Column="2" Text="Value" FontSize="11.5" Foreground="{StaticResource TextTertiary}"/>
+                            <TextBlock Grid.Column="3" Text="Description" FontSize="11.5" Foreground="{StaticResource TextTertiary}"/>
+                        </Grid>
+                        <Border Grid.Row="1" Background="{StaticResource Hairline}" Height="1"/>
+
+                        <Grid Row="2" ColumnDefinitions="28,*,*,*" Margin="14,10">
+                            <CheckBox Grid.Column="0" IsChecked="True"/>
+                            <TextBox Grid.Column="1" Classes="mono" Text="page" Margin="0,0,8,0" Background="Transparent" BorderThickness="0" Padding="0"/>
+                            <TextBox Grid.Column="2" Classes="mono" Text="1" Margin="0,0,8,0" Background="Transparent" BorderThickness="0" Padding="0"/>
+                            <TextBox Grid.Column="3" Text="Page number" Background="Transparent" BorderThickness="0" Padding="0" Foreground="{StaticResource TextSecondary}"/>
+                        </Grid>
+
+                        <Grid Row="3" ColumnDefinitions="28,*,*,*" Margin="14,10">
+                            <CheckBox Grid.Column="0" IsChecked="True"/>
+                            <TextBox Grid.Column="1" Classes="mono" Text="limit" Margin="0,0,8,0" Background="Transparent" BorderThickness="0" Padding="0"/>
+                            <TextBox Grid.Column="2" Classes="mono" Text="25" Margin="0,0,8,0" Background="Transparent" BorderThickness="0" Padding="0"/>
+                            <TextBox Grid.Column="3" Text="Results per page" Background="Transparent" BorderThickness="0" Padding="0" Foreground="{StaticResource TextSecondary}"/>
+                        </Grid>
+
+                        <Grid Row="4" ColumnDefinitions="28,*" Margin="14,4,14,10">
+                            <TextBlock Grid.Column="1" Text="+  Add parameter" FontSize="12.5" Foreground="{StaticResource TextTertiary}"/>
+                        </Grid>
+
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <!-- ============================================================ -->
+            <!-- RESPONSE PANE -->
+            <!-- ============================================================ -->
+            <Grid Row="3" Background="{StaticResource Panel}" RowDefinitions="1,Auto,1,Auto,*" MinHeight="300">
+                <Border Grid.Row="0" Background="{StaticResource Hairline}"/>
+
+                <!-- status row -->
+                <Grid Row="1" ColumnDefinitions="Auto,Auto,Auto,*,Auto" Margin="20,12" VerticalAlignment="Center">
+                    <Border Grid.Column="0" Background="#1A2E27" CornerRadius="5" Padding="8,3">
+                        <StackPanel Orientation="Horizontal" Spacing="6">
+                            <Ellipse Width="7" Height="7" Fill="{StaticResource StatusOk}"/>
+                            <TextBlock Text="200 OK" FontFamily="{StaticResource FontMono}" FontSize="12" FontWeight="Bold" Foreground="{StaticResource StatusOk}"/>
+                        </StackPanel>
+                    </Border>
+                    <TextBlock Grid.Column="1" Text="118 ms" FontFamily="{StaticResource FontMono}" FontSize="12.5"
+                               Foreground="{StaticResource TextSecondary}" Margin="16,0,0,0" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="2" Text="1.4 KB" FontFamily="{StaticResource FontMono}" FontSize="12.5"
+                               Foreground="{StaticResource TextSecondary}" Margin="16,0,0,0" VerticalAlignment="Center"/>
+                    <Button Grid.Column="4" Classes="ghost" Content="Copy"/>
+                </Grid>
+
+                <Border Grid.Row="2" Background="{StaticResource Hairline}"/>
+
+                <!-- response tabs -->
+                <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="20,12,0,0">
+                    <RadioButton Classes="tab" GroupName="restabs" Content="Body" IsChecked="True"/>
+                    <RadioButton Classes="tab" GroupName="restabs" Content="Headers (6)"/>
+                    <RadioButton Classes="tab" GroupName="restabs" Content="Cookies"/>
+                </StackPanel>
+
+                <!-- JSON body -->
+                <ScrollViewer Grid.Row="4" Margin="20,10,20,20">
+                    <SelectableTextBlock FontFamily="{StaticResource FontMono}" FontSize="13" LineHeight="22">
+                        <Run Text="{}{}" Foreground="{StaticResource JsonPunct}"/><LineBreak/>
+                        <Run Text="  " /><Run Text="&quot;data&quot;" Foreground="{StaticResource JsonKey}"/><Run Text=": [" Foreground="{StaticResource JsonPunct}"/><LineBreak/>
+                        <Run Text="    {" Foreground="{StaticResource JsonPunct}"/><LineBreak/>
+                        <Run Text="      " /><Run Text="&quot;id&quot;" Foreground="{StaticResource JsonKey}"/><Run Text=": " Foreground="{StaticResource JsonPunct}"/><Run Text="1042" Foreground="{StaticResource JsonNumber}"/><Run Text="," Foreground="{StaticResource JsonPunct}"/><LineBreak/>
+                        <Run Text="      " /><Run Text="&quot;name&quot;" Foreground="{StaticResource JsonKey}"/><Run Text=": " Foreground="{StaticResource JsonPunct}"/><Run Text="&quot;Amir Khaled&quot;" Foreground="{StaticResource JsonString}"/><Run Text="," Foreground="{StaticResource JsonPunct}"/><LineBreak/>
+                        <Run Text="      " /><Run Text="&quot;email&quot;" Foreground="{StaticResource JsonKey}"/><Run Text=": " Foreground="{StaticResource JsonPunct}"/><Run Text="&quot;amir@example.com&quot;" Foreground="{StaticResource JsonString}"/><Run Text="," Foreground="{StaticResource JsonPunct}"/><LineBreak/>
+                        <Run Text="      " /><Run Text="&quot;active&quot;" Foreground="{StaticResource JsonKey}"/><Run Text=": " Foreground="{StaticResource JsonPunct}"/><Run Text="true" Foreground="{StaticResource JsonNumber}"/><LineBreak/>
+                        <Run Text="    }," Foreground="{StaticResource JsonPunct}"/><LineBreak/>
+                        <Run Text="    {" Foreground="{StaticResource JsonPunct}"/><LineBreak/>
+                        <Run Text="      " /><Run Text="&quot;id&quot;" Foreground="{StaticResource JsonKey}"/><Run Text=": " Foreground="{StaticResource JsonPunct}"/><Run Text="1043" Foreground="{StaticResource JsonNumber}"/><Run Text="," Foreground="{StaticResource JsonPunct}"/><LineBreak/>
+                        <Run Text="      " /><Run Text="&quot;name&quot;" Foreground="{StaticResource JsonKey}"/><Run Text=": " Foreground="{StaticResource JsonPunct}"/><Run Text="&quot;Salma Nasser&quot;" Foreground="{StaticResource JsonString}"/><Run Text="," Foreground="{StaticResource JsonPunct}"/><LineBreak/>
+                        <Run Text="      " /><Run Text="&quot;email&quot;" Foreground="{StaticResource JsonKey}"/><Run Text=": " Foreground="{StaticResource JsonPunct}"/><Run Text="&quot;salma@example.com&quot;" Foreground="{StaticResource JsonString}"/><Run Text="," Foreground="{StaticResource JsonPunct}"/><LineBreak/>
+                        <Run Text="      " /><Run Text="&quot;active&quot;" Foreground="{StaticResource JsonKey}"/><Run Text=": " Foreground="{StaticResource JsonPunct}"/><Run Text="false" Foreground="{StaticResource JsonNumber}"/><LineBreak/>
+                        <Run Text="    }" Foreground="{StaticResource JsonPunct}"/><LineBreak/>
+                        <Run Text="  ]," Foreground="{StaticResource JsonPunct}"/><LineBreak/>
+                        <Run Text="  " /><Run Text="&quot;page&quot;" Foreground="{StaticResource JsonKey}"/><Run Text=": " Foreground="{StaticResource JsonPunct}"/><Run Text="1" Foreground="{StaticResource JsonNumber}"/><Run Text="," Foreground="{StaticResource JsonPunct}"/><LineBreak/>
+                        <Run Text="  " /><Run Text="&quot;total&quot;" Foreground="{StaticResource JsonKey}"/><Run Text=": " Foreground="{StaticResource JsonPunct}"/><Run Text="214" Foreground="{StaticResource JsonNumber}"/><LineBreak/>
+                        <Run Text="}" Foreground="{StaticResource JsonPunct}"/>
+                    </SelectableTextBlock>
+                </ScrollViewer>
+
+            </Grid>
+
+        </Grid>
+    </Grid>
 </Window>
